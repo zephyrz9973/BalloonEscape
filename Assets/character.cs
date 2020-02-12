@@ -74,9 +74,10 @@ public class character : MonoBehaviour
 
         if (collision.gameObject.tag == "Respawn") {
             PlayerPrefs.SetString ("lastLoadedScene", SceneManager.GetActiveScene().name);
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(6);
         }
     }
+
 
 
     void OnTriggerEnter2D(Collider2D other) {
