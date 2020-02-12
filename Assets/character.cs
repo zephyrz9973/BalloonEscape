@@ -14,6 +14,7 @@ public class character : MonoBehaviour
     {
         m_GravityDirection = GravityDirection.Up;
         lastInterval = Time.realtimeSinceStartup;
+
     }
 
     void Update()
@@ -24,48 +25,50 @@ public class character : MonoBehaviour
                 //Change the gravity to be in a downward direction (default)
                 Physics2D.gravity = new Vector2(0, -9.8f);
                 //Press the space key to switch to the left direction
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    m_GravityDirection = GravityDirection.Left;
-                    Debug.Log("Left");
-                }
                 break;
 
             case GravityDirection.Left:
                 //Change the gravity to go to the left
                 Physics2D.gravity = new Vector2(-9.8f, 0);
                 //Press the space key to change the direction of gravity
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    m_GravityDirection = GravityDirection.Up;
-                    Debug.Log("Up");
-                }
                 break;
 
             case GravityDirection.Up:
                 //Change the gravity to be in a upward direction
                 Physics2D.gravity = new Vector2(0, 9.8f);
                 //Press the space key to change the direction
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    m_GravityDirection = GravityDirection.Right;
-                    Debug.Log("Right");
-                }
                 break;
 
             case GravityDirection.Right:
                 //Change the gravity to go in the right direction
                 Physics2D.gravity = new Vector2(9.8f, 0);
                 //Press the space key to change the direction
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    m_GravityDirection = GravityDirection.Down;
-                    Debug.Log("Down");
-                }
 
                 break;
         }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            m_GravityDirection = GravityDirection.Left;
+            Debug.Log("Left");
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            m_GravityDirection = GravityDirection.Up;
+            Debug.Log("Up");
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            m_GravityDirection = GravityDirection.Right;
+            Debug.Log("Right");
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            m_GravityDirection = GravityDirection.Down;
+            Debug.Log("Down");
+        }
+
     }
+
 
     void OnCollisionEnter2D(Collision2D collision) {
 
@@ -81,7 +84,13 @@ public class character : MonoBehaviour
             float timeNow = Time.realtimeSinceStartup;
             int y = SceneManager.GetActiveScene().buildIndex;
             Debug.Log("Level " + y + " complete time:" + (timeNow-lastInterval));
+
+        // Check if we have reached beyond 2 seconds.
+        // Subtracting two is more accurate over time than resetting to zero.
             SceneManager.LoadScene(y+1);
         }
+            
     }
 }
+
+
